@@ -6,3 +6,5 @@ const result = babel.transform('import { sortBy, debounce } from "lodash"', {
         plugin
     ]
 });
+
+console.log(result);

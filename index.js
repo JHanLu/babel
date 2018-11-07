@@ -2,6 +2,7 @@ var babel = require('babel-core');
 var t = require('babel-types');
 
 const visitor = {
+    // convert simple binaryExpression like 'const result = 1 + 2' to 'const result = 3'
     BinaryExpression(path) {
         const node = path.node;
         let result;
@@ -34,8 +35,11 @@ const visitor = {
 
         // import为es6解构形式
         if (specifiers.length) {
-            const arr = specifiers.map(node => node.imported.name);
-
+            //const arr = specifiers.map(node => node.imported.name);
+            let str = '';
+            specifiers.forEach(node => {
+                str += 'import ' + node.imported.name + ' from ' + '"' + source + '/' + node.imported.name + '";';
+            });
         }
     }
 };
